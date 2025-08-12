@@ -58,6 +58,8 @@ set()を使う方法で実装。3 回実装してみて大きく内容は変わ�
 
 ### Step 4
 
+以下、いただいたフィードバック:
+
 - None などの singleton との比較には is か is not を使うようにする
   - https://peps.python.org/pep-0008/#programming-recommendations
   - singleton はただ一つしか存在しない特別なオブジェクトなので、どの変数に None を代入しても常に同じメモリ上の None オブジェクトを指す

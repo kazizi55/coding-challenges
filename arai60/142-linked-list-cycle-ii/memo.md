@@ -80,3 +80,13 @@ Hare and Tortoise、勉強にはなるものの、Set()の方がすぐ書ける�
 ### Step 4
 
 以下、いただいたフィードバック:
+
+- Python は末尾再帰最適化を実装していないので、データサイズによっては stack overflow になってしまう
+  - https://stackoverflow.com/questions/13591970/does-python-optimize-tail-recursion
+- X,Y,Z と処理があったときにそれぞれがどれくらい複雑か、関連しあっているかで 1-4 のパターンから技術的に選択できるとよい
+  - https://discord.com/channels/1084280443945353267/1221030192609493053/1225674901445283860
+  - https://discord.com/channels/1084280443945353267/1192728121644945439/1194296454181826590
+- catchup だと追いつく、という意味合いですが、実際は、catchup の方が先行する node なのではないか。fast & slow の概念も Hare and Tortoise の第 2 ステップでは捨象されているので、追いつく・追いつかれるという表現自体がそぐわないかもしれない
+- 空行をどう入れるかに関しては、top-level function や class definition など以外は個人の裁量に委ねられている
+  - https://peps.python.org/pep-0008/#blank-lines
+- get で始まるメソッドはメンバ変数を返すだけの軽量なアクセサであるという印象を与えるため、重い計算をするメソッドには不適であるという意見もある

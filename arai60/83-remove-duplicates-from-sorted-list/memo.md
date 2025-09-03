@@ -65,7 +65,10 @@ https://discord.com/channels/1084280443945353267/1228896007279083653/12318238403
 https://discord.com/channels/1084280443945353267/1200089668901937312/1206180274442993694
 
 if node だと 0 や[]の時は true になるので、それらも false として判定してほしいときは if node is not None を使うのが良さそう。
+=> 逆。if node だと 0、[]、None の時は false になる。if node is not None だと 0 や[]の時に true になる。
 https://github.com/olsen-blue/Arai60/pull/3/files#r1930423910
+https://docs.python.org/3/library/stdtypes.html#truth
+https://google.github.io/styleguide/pyguide.html#214-truefalse-evaluations
 
 #### 個人的な好み
 
@@ -79,3 +82,7 @@ https://github.com/olsen-blue/Arai60/pull/3/files#r1930423910
 ### Step 4
 
 以下、いただいたフィードバック:
+
+- 元の連結リストを保持したまま重複を削除した新しい連結リストを作成する実装を目指しているのに、元の連結リストを変更してしまっている
+- 説明変数を無くした方がわかりやすくなる場合もある (node = new_node.next という感じで node = node.next と対比して記述することができるようになるので、added_node は冗長)
+- if node だと 0、[]、None の時は false になる。if node is None だと 0 や[]の時に true になる。

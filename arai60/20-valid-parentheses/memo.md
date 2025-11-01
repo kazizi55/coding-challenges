@@ -37,9 +37,9 @@
   - 関数の呼び出しを測るには timeit を import して使うといい
   - stack の命名に関しては、他の方のコードを見て、open_to_close_brackets など色んな命名が見られたが、プッシュダウンオートマトンであることを明示したいので stack とした
 - SolutionWithBracketPairsAndSentinel
-  - bracket pair を作ることでそれぞれのカッコごとに条件を作らなくて良くなる
+  - bracket pair を作ることでそれぞれの bracket ごとに条件を作らなくて良くなる
   - {open: close}という形で pair を定義することで bracket_pairs[stack[-1]]と定義でき、仮に bracket 以外が入力されても例外を投げなくなる
-  - さらに番兵を入れることで stack[-1]で参照エラーになることも防げる
+  - さらに sentinel を入れることで stack[-1]で参照エラーになることも防げる
 - SolutionWithReversedBracketPairs
   - 参照した回答との差分
     - stack.pop()を条件文に入れて副作用を発生させたくなかったので、last_stack = stack.pop()を定義して、if last_stack != bracket_pairs[char]という条件文にした

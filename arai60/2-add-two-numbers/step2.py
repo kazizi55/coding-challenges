@@ -4,10 +4,12 @@ class RecursiveSolution:
             if node is None:
                 return 0
             return node.val
+        
         def get_next_node(node):
             if node is None:
                 return None
             return node.next
+        
         def add_two_numbers(l1, l2, carry):
             if l1 is None and l2 is None and carry == 0:
                 return None
@@ -15,6 +17,7 @@ class RecursiveSolution:
             node = ListNode(total % 10)
             node.next = add_two_numbers(get_next_node(l1), get_next_node(l2), total // 10)
             return node
+        
         return add_two_numbers(l1, l2, 0)
 
 class SolutionUsingNumberList:
@@ -36,4 +39,5 @@ class SolutionUsingNumberList:
                 current.next = ListNode(total % 10)
                 current = current.next
                 carry = total // 10
+                
         return add_two_numbers([l1, l2])

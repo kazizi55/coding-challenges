@@ -5,7 +5,7 @@ class Solution:
                 return 0
             return node.val
         
-        sentinel = ListNode
+        sentinel = ListNode()
         node = sentinel
         carry = 0
 

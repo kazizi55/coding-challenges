@@ -69,3 +69,13 @@ step 1 で解いた解法で 3 回とも解くことにした。sentinel を使�
 ### Step 4
 
 以下、いただいたフィードバック:
+
+- 共通
+  - inner function の後には空行を入れ、区切りであることを視覚的に表現した方が見やすい
+- divmod 関数を使う version
+  - (divmod 関数)[https://docs.python.org/ja/3/library/functions.html#divmod]を使えば商と剰余をタプルで得られる
+- 番兵を使わず、代わりに while ループ内に条件分岐を作る version
+- SolutionUsingNumberList を while nodes or carry != 0 で書き直した version
+  - while True の無限ループで書いているのに break が出てこないと若干困惑するので、通常の loop で条件を明示して、読み手の負荷を下げる
+  - inner function の prefix として \_ をつけることで外側の関数と同じ名前になることを避ける
+- val の total への加算と next へ進めることをまとめる version

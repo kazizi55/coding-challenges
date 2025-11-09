@@ -67,3 +67,13 @@
 ### Step 4
 
 以下、いただいたフィードバック:
+
+- 共通
+  - Step1 で何を考えて解いていたかもう少し書くとレビュワーがコメントがしやすい
+- SolutionWithBrackets
+  - `bracket_pairs[stack[-1]]`が少し認知負荷が高いと感じるので、変数の命名で明示的にすると負荷を下げることができる
+- SolutionWithBracketPairsAndSentinel
+  - `bracket_pairs[stack[-1]]`が少し認知負荷が高いと感じるので、変数の命名で明示的にすると負荷を下げることができる
+  - for 文内の条件分岐部分について早期 return して else をなくすと読みやすくなる
+
+なお、stack.pop()するのを for ループの最後から、if char == expected_closing_bracket の中に変えた。一定の条件で stack.pop()することを明示したかったのと、それ以外は全て return False という fallback 的な形で表現した方が分かりやすいと思ったためだ。

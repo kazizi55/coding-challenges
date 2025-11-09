@@ -61,3 +61,15 @@ RecursiveSolutionWithTail を 2 回、RecursiveSolutionPassingRest を 1 回解�
 ### Step 4
 
 以下、いただいたフィードバック:
+
+- 共通
+  - 組み込み関数を上書きするのは避けた方がいい (可読性の低下を招く上、上書きした組み込み関数を使うことができなくなる)
+    - 今回だと reversed() を上書きしてしまっていた
+- 再帰の解法
+  - 外側の head を上書きしているため、意図がやや分かりづらく感じたので、new_head や reversed_head 等に変えるのが良さそう
+  - 今回の解法は計算順序の違いによって区別することが可能
+    - WithTail と WithoutTail は bottom-up (帰りがけ) で完成
+    - PassingRest は top-down (行きがけ) で完成
+- stack を使う解法
+  - [reversed()](https://docs.python.org/ja/3/library/functions.html#reversed) を使って解くこともできる
+  - num = stack.pop() と表現すると、stack の Last In, First Out を表現できて自然

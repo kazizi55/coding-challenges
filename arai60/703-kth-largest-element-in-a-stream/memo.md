@@ -126,3 +126,11 @@ Step 2 で色々みてきた中で、heapq を使う version (init で add す�
 ### Step 4
 
 以下、いただいたフィードバック:
+
+- 共通
+  - 時間計算量から、どのくらいの処理時間がかかるか推定するといい
+    - https://docs.google.com/document/d/11HV35ADPo9QxJOpJQ24FcZvtvioli770WWdZZDaLOfg/edit?tab=t.0#heading=h.xbcr3241jgv8
+    - https://docs.google.com/document/d/11HV35ADPo9QxJOpJQ24FcZvtvioli770WWdZZDaLOfg/edit?tab=t.0#heading=h.9jgb6rowax56
+  - google style guide では package や module 単位で import するルールが定められている
+    - https://google.github.io/styleguide/pyguide.html#22-imports
+    - 一方で pep8 にはそのような決まりはないので style によってバリエーションがあることを念頭におく必要がある

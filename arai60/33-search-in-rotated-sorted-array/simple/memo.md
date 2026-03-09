@@ -13,6 +13,8 @@ https://leetcode.com/problems/search-in-rotated-sorted-array/description/
 
 ## Referenced PR
 
+https://github.com/olsen-blue/Arai60/pull/43
+
 ## Comments
 
 ### Step 1

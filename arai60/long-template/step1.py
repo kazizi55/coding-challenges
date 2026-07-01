@@ -1,4 +1,0 @@
-class InitialSolution:
-
-
-class RevisedSolution:

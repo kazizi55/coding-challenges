@@ -245,4 +245,17 @@ class Solution:
 
 ## Step 4
 
+### 解法 1: Step 1 と同じ流れでタプルの num のみを返す
 
+- Step 1と同じ流れだが、num_to_frequency.items() の返り値のタプルのうちの num をそのまま答えの配列に含める感じ。
+- 流れがスッキリして分かりやすい。そもそも step 1でやっていたような、答えの配列を作るタイミングで dict に変換するのは冗長だなと気づいた。
+
+```py
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        num_to_frequency = defaultdict(int)
+        for num in nums:
+            num_to_frequency[num] += 1
+        num_and_frequency_ordered_by_desc = sorted(num_to_frequency.items(), key=itemgetter(1), reverse=True)
+        return [ num for num, _ in num_and_frequency_ordered_by_desc[:k] ]
+```

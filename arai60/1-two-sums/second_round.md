@@ -108,4 +108,18 @@ class Solution:
 
 ## Step 4
 
+- step 3とほぼコードはそのままに、エラー文をより具体的にした。
+- そもそも入力に型ヒントが与えられていて numsが List[int] 以外になる可能性は一旦考えなくてもいいのと、一連の処理の後に来るエラーなのでもっと具体的な内容でもいいと思い直したため。
+
+```py
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        num_to_index = {}
+        for index, num in enumerate(nums):
+            if not (complement := target - num) in num_to_index:
+                num_to_index[num] = index
+                continue
+            return [ index, num_to_index[complement] ]
+        raise ValueError("Can't find the pair of elements whose total is the target value.")
+```
 

@@ -84,7 +84,7 @@ class Solution:
 - https://github.com/hayashi-ay/leetcode/pull/66 の　4th
 - https://github.com/olsen-blue/Arai60/pull/10/changes
 
-### 解法2: 関数切り出し + set() を使用
+### 解法2: 関数切り出しなし
 
 - 2次元 grid を左上から塗りつぶしていく感じで、while ループ一周ごとに最小合計を min-heap から pop して答えに加えつつ、下に1つ進み、右に一つ進むという解法。
 - 解法1が1マスにつき右と下にとにかく進んで条件合致しなかったら skip みたいなのをやっているのに対し、解法2は律儀に左上からなぞっていく感じ。無駄が少なくて好みだなー。
@@ -144,4 +144,34 @@ class Solution:
 
 ## Step 4
 
+- step 2 の解法2を pep8 に則って、一行が80文字以上だったら改行するようにしてみた
+  - https://peps.python.org/pep-0008/#maximum-line-length
 
+```py
+class Solution:
+    def kSmallestPairs(self, nums1: List[int], nums2: List[int], k: int) -> List[List[int]]:
+        candidates = [(nums1[0] + nums2[0], 0, 0)]
+        pairs = []
+        while len(pairs) < k:
+            _, index1, index2 = heapq.heappop(candidates)
+            pairs.append([nums1[index1], nums2[index2]])
+            if index2 == 0 and index1 + 1 < len(nums1):
+                heapq.heappush(
+                    candidates,
+                    (
+                        nums1[index1 + 1] + nums2[index2],
+                        index1 + 1,
+                        index2 
+                    )
+                )
+            if index2 + 1 < len(nums2):
+                heapq.heappush(
+                    candidates,
+                    (
+                        nums1[index1] + nums2[index2 + 1],
+                        index1,
+                        index2 + 1
+                    )
+                )
+        return pairs
+```

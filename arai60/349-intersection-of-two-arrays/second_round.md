@@ -223,4 +223,44 @@ class Solution:
 
 ## Step 4
 
+### 解法1: seen_in_nums1 の length を nums1 と nums2 の max の値にする
 
+- step3 よりも LeetCode の制約を超えて対応できるのでそれが良さではある。
+- が、seen_in_nums1 の個数がなぜ max(nums2) も考慮しなければならないのかが後続処理を見ないとわからないのが若干可読性が悪いかも。
+
+```py
+class Solution:
+    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        seen_in_nums1 = [False] * (
+            max(
+                max(nums1),
+                max(nums2)
+            )+1
+        )
+        for num1 in nums1:
+            seen_in_nums1[num1] = True
+        intersection = []
+        for num2 in nums2:
+            if not seen_in_nums1[num2]:
+                continue
+            intersection.append(num2)
+            seen_in_nums1[num2] = False
+        return intersection
+```
+
+### 解法2: 片方だけ Set にする
+
+- step1 の解法2の intersection() を自前実装した version
+
+```py
+class Solution:
+    def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        unique_nums1 = set(nums1)
+        intersection = []
+        for num2 in nums2:
+            if not num2 in unique_nums1:
+                continue
+            intersection.append(num2)
+            unique_nums1.remove(num2)
+        return intersection
+```

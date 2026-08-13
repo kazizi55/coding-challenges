@@ -231,4 +231,43 @@ class Solution:
 
 ## Step 4
 
+### State Machine に振り切る解法
 
+- 純粋な state で管理するようにしたら match 文だけで書けるようになった。状態遷移がよりはっきり見える形になってこれはこれで好み。
+- if 文 で書くか match 文で書くか迷ったが、個人的には、左辺が同じものを続けて比較している場合には match 文の方が見やすいと思う。
+- state を enum 管理するか迷ったが、1関数のためにやるのは若干やり過ぎ感があるかなと思ったので見送った。クラス全体で使うとか、複数 module で使われるとかなったら enum にすると思う。
+  - https://docs.python.org/3/library/enum.html
+
+```py
+class Solution:
+    def numUniqueEmails(self, emails: List[str]) -> int:
+        def canonicalize(email: str) -> str:
+            canonicalized = []
+            state = "LOCAL"
+            for c in email:
+                match state:
+                    case "LOCAL":
+                        match c:
+                            case "@":
+                                state = "DOMAIN"
+                                canonicalized.append(c)
+                            case "+":
+                                state = "ALIAS"
+                            case ".":
+                                continue
+                            case _:
+                                canonicalized.append(c)
+                    case "ALIAS":
+                        match c:
+                            case "@":
+                                state = "DOMAIN"
+                                canonicalized.append(c)
+                    case "DOMAIN":
+                        canonicalized.append(c)
+            return "".join(canonicalized)
+
+        canonicalized_emails = set()
+        for email in emails:
+            canonicalized_emails.add(canonicalize(email))
+        return len(canonicalized_emails)
+```

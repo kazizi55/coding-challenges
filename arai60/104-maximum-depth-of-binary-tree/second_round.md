@@ -210,4 +210,55 @@ class Solution:
 
 ## Step 4
 
+- step2 の解法3を改善
+  - tuple の要素数が多くてそれぞれが何なのかわかりづらかったので、dataclass を使うように
+  - 帰りがけに親の左と右の depth を上書きしていくのをわかりやすくした
+  - is_going_forward を visited に置き換え
 
+```py
+from dataclasses import dataclass
+
+@dataclass
+class TraverseStatus:
+    node: Optional[TreeNode]
+    parent_traverse_status: Optional["TraverseStatus"] = None
+    is_left_child: bool = False
+    left_depth: int = 0
+    right_depth: int = 0
+    visited: bool = False
+
+class Solution:
+    def maxDepth(self, root: TreeNode | None) -> int:
+        if root is None:
+            return 0
+        traverse_statuses = [TraverseStatus(node=root)]
+        while traverse_statuses:
+            status = traverse_statuses[-1]
+            if not status.visited:
+                status.visited = True
+                if status.node.right is not None:
+                    traverse_statuses.append(
+                        TraverseStatus(
+                            node=status.node.right,
+                            parent_traverse_status=status
+                        )
+                    )
+                if status.node.left is not None:
+                    traverse_statuses.append(
+                        TraverseStatus(
+                            node=status.node.left,
+                            parent_traverse_status=status,
+                            is_left_child=True
+                        )
+                    )
+                continue
+            traverse_statuses.pop()
+            max_depth = max(status.left_depth, status.right_depth) + 1
+            if status.parent_traverse_status is None:
+                return max_depth
+            if status.is_left_child:
+                status.parent_traverse_status.left_depth = max_depth
+            else:
+                status.parent_traverse_status.right_depth = max_depth
+        return 0
+```

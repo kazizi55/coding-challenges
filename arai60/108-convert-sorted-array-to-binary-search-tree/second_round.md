@@ -362,4 +362,36 @@ class Solution:
 
 ## Step 4
 
+### 解法1: step2 の解法2 の build_tree で要素の個数を受け取る
 
+- 要素の個数を受け取るように変更することで個人的には処理が直感的になった。こっちの方が好みかも。
+- 元の解法だとせっかく index を受け取っているのにそれを index として使うことがないので少し驚きがあると思う
+- また、len(nums) を引数として注入するようになったので、この解法の方が build_tree を汎用化しやすい
+
+```py
+from collections import deque
+
+class Solution:
+    def sortedArrayToBST(self, nums: list[int]) -> TreeNode | None:
+        def build_tree(count) -> TreeNode | None:
+            if count <= 0:
+                return None
+            node = TreeNode()
+            left_count = (count - 1) // 2
+            right_count = (count - 1) - left_count
+            node.left = build_tree(left_count)
+            node.right = build_tree(right_count)
+            return node
+
+        nodes_to_visit = deque(nums)
+        def set_values_for_nodes(node: TreeNode | None) -> None:
+            if node is None:
+                return None
+            set_values_for_nodes(node.left)
+            node.val = nodes_to_visit.popleft()
+            set_values_for_nodes(node.right)
+
+        root = build_tree(len(nums))
+        set_values_for_nodes(root)
+        return root
+```
